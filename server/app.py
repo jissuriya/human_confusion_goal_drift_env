@@ -10,7 +10,10 @@ def home():
 
 @app.post("/reset")
 def reset():
-    return {"message": "environment reset"}
+    return {
+        "observation": "start",
+        "info": {}
+    }
 
 @app.post("/step")
 def step():
