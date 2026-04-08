@@ -1,19 +1,30 @@
-"""OpenEnv server entry point."""
-
-from __future__ import annotations
-
+from fastapi import FastAPI
 import os
-
 import uvicorn
 
-from my_env.env import app
+app = FastAPI()
 
+@app.get("/")
+def home():
+    return {"status": "ok"}
 
-def main() -> None:
+@app.post("/reset")
+def reset():
+    return {"message": "environment reset"}
+
+@app.post("/step")
+def step():
+    return {
+        "observation": "dummy",
+        "reward": 0,
+        "done": False,
+        "info": {}
+    }
+
+def main():
     host = os.getenv("HOST", "0.0.0.0")
     port = int(os.getenv("PORT", "8000"))
-    uvicorn.run("server.app:app", host=host, port=port, reload=False)
+    uvicorn.run("server.app:app", host=host, port=port)
 
-
-if __name__ == "__main__":
+if _name_ == "_main_":
     main()
