@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "human-confusion-goal-drift-env"
+version = "0.1.0"
+description = "OpenEnv environment for ambiguous human instructions and goal drift."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "openenv-core[cli]>=0.2.1",
+  "openai>=1.52.0",
+  "pydantic>=2.8.0",
+  "fastapi>=0.115.0",
+  "uvicorn[standard]>=0.30.0",
+]
+
+[project.scripts]
+server = "server.app:main"
+
+[tool.setuptools]
+packages = ["my_env", "server"]
